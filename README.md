@@ -2,7 +2,23 @@
 
 
 ## docker compose
-
+```
+version: "3.9"  # optional since v1.27.0
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/code
+      - logvolume01:/var/log
+    links:
+      - redis
+  redis:
+    image: redis
+volumes:
+  logvolume01: {}
+```
 ### 執行 compose
 docker-compose up
 
@@ -13,7 +29,7 @@ docker-compose up -d
 docker-compose stop
 
 ### 移除 compose
-docker-compose down
+docker-compose down 
 
 ### 移除 compose volume
 docker-compose down -v
@@ -51,6 +67,7 @@ environment:
   - SHOW=true
   - SESSION_SECRET
 ```
+
 
 
 
